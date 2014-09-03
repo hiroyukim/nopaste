@@ -2,6 +2,7 @@ package NoPaste::Web::Dispatcher;
 use strict;
 use warnings;
 use Amon2::Web::Dispatcher::Lite;
+use Text::Markdown::Discount;
 use Data::UUID;
 
 my $uuid = Data::UUID->new();
@@ -34,9 +35,10 @@ post '/post' => sub {
 
 get '/entry/{entry_id}' => sub {
     my ($c, $args) = @_;
-
+    my $type = $c->req->param('type');
     my $row = $c->dbh->selectrow_hashref(q{SELECT * FROM entry WHERE entry_id=?}, {}, $args->{entry_id});
-    return $c->render('show.tt', $row);
+    $row->{body} = Text::Markdown::Discount::markdown $row->{body} if $type && $type eq 'mk';
+    return $c->render('show.tt', { row => $row, type => $type });
 };
 
 1;

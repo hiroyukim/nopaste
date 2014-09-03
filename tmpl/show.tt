@@ -1,7 +1,11 @@
 [% WRAPPER 'include/layout.tt' %]
 
 <div>
-    <pre class="code">[% body %]</pre>
+    [% IF type && type == 'mk' %]
+        [% row.body | raw %]
+    [% ELSE %]
+        <pre class="code">[% row.body %]</pre>
+    [% END %]
 </div>
 
 [% END %]

@@ -16,6 +16,7 @@ requires 'Time::Piece'                     => '1.20';
 requires 'Test::WWW::Mechanize::PSGI'      => '0';
 requires 'JSON'                            => '2.50';
 requires 'Plack::Middleware::Session'      => '0';
+requires 'Text::Markdown::Discount'        => '0';
 requires 'Data::UUID' => 0;
 requires 'Module::Find' => 0;
 requires 'Amon2::Config::Simple';
